@@ -2,6 +2,7 @@ import React from "react";
 
 import Menu from "../menu/Menu";
 import Footer from "../footer/Footer";
+import Sales from "./sales/Sales";
 
 import { Container, Grid, Card } from "@material-ui/core";
 
@@ -26,7 +27,7 @@ class Home extends React.Component {
 
               <Grid item xs={12}>
                 <Card>
-                  
+                  <Sales />
                 </Card>
               </Grid>
             </Grid>
