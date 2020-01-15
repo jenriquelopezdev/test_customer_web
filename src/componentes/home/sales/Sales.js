@@ -6,8 +6,21 @@ import MaterialTable from "material-table";
 //import './Slider.css';
 
 class Sales extends React.Component {
+  tableRef = React.createRef();
+
   render() {
-    return <MaterialTable></MaterialTable>;
+    return (
+      <MaterialTable
+        tableRef={this.tableRef}
+        columns={[
+          { title: "Cliente", field: "CUSTOMER.fistName" },
+          { title: "Correo", field: "CUSTOMER.email" },
+          { title: "Telefono Fijo", field: "CUSTOMER.phone" },
+          { title: "Producto", field: "PRODUCT.name" },
+          { title: "Cantidad", field: "quantity" }
+        ]}
+      ></MaterialTable>
+    );
   }
 }
 
