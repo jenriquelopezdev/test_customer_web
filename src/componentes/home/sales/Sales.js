@@ -3,10 +3,19 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import MaterialTable from "material-table";
+import Axios from "axios";
 //import './Slider.css';
 
 class Sales extends React.Component {
   tableRef = React.createRef();
+
+
+  async getSales(query) {
+    const response = await Axios.get("http://localhost:4040/api/sale");
+    response.page = 0;
+    response.totalCount = response.data.length;
+    return response;
+  }
 
   render() {
     return (
@@ -19,6 +28,22 @@ class Sales extends React.Component {
           { title: "Producto", field: "PRODUCT.name" },
           { title: "Cantidad", field: "quantity" }
         ]}
+        data={query => this.getSales()}
+        title=""
+        options={{
+          search: true,
+          pageSize: 10
+        }}
+        actions={[
+          {
+            icon: "refresh",
+            tooltip: "Refresh Data",
+            isFreeAction: true,
+            onClick: () =>
+              this.tableRef.current && this.tableRef.current.onQueryChange()
+          }
+        ]}
+        
       ></MaterialTable>
     );
   }
