@@ -9,12 +9,22 @@ import Axios from "axios";
 class Sales extends React.Component {
   tableRef = React.createRef();
 
-
-  async getSales(query) {
+  async getSales() {
     const response = await Axios.get("http://localhost:4040/api/sale");
     response.page = 0;
     response.totalCount = response.data.length;
     return response;
+  }
+
+  async deleteSales(id) {
+    this.tableRef.current.onQueryChange();
+    return await fetch("http://localhost:4040/api/sale/" + id, {
+      method: "DELETE"
+    });
+  }
+
+  changeToDetail(id) {
+    this.props.history.push("sales/" + id);
   }
 
   render() {
@@ -41,9 +51,23 @@ class Sales extends React.Component {
             isFreeAction: true,
             onClick: () =>
               this.tableRef.current && this.tableRef.current.onQueryChange()
+          },
+          {
+            icon: "visibility",
+            tooltip: "Detail",
+            onClick: (event, rowData) => {
+              this.changeToDetail(rowData.id);
+            }
           }
         ]}
-        
+        editable={{
+          isEditable: "false",
+          onRowDelete: oldData =>
+            new Promise((resolve, reject) => {
+              this.deleteSales(oldData.id);
+              resolve();
+            })
+        }}
       ></MaterialTable>
     );
   }
