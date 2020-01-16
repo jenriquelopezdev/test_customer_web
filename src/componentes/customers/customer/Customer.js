@@ -42,7 +42,7 @@ class Customer extends React.Component {
   }
 
   changeToDetail(id) {
-    console.log(id);
+    this.props.history.push("/sales/customer/" + id);
   }
 
   render() {

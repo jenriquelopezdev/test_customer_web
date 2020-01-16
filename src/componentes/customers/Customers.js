@@ -3,38 +3,35 @@ import React from "react";
 import Menu from "../menu/Menu";
 import Footer from "../footer/Footer";
 import Customer from "./customer/Customer";
-import Card from "@material-ui/core/Card";
+import { Container, Grid, Card } from "@material-ui/core";
 //import './Slider.css';
 
 class Customers extends React.Component {
-
   render() {
     return (
       <>
         <Menu />
+        <br />
         <main role="main" className="flex-shrink-0 mt-5">
-          <div className="container">
-            <div className="row">
-              <div className="col-10">
-                <h1>Clientes</h1>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
+          <Container fixed>
+            <Grid container>
+              <Grid item xs={12}>
+                <h1>Ventas</h1>
+              </Grid>
+              <Grid item xs={12}>
                 <p>
                   Aute pariatur ullamco dolor nisi deserunt id consectetur
                   proident voluptate sint.
                 </p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
+              </Grid>
+
+              <Grid item xs={12}>
                 <Card>
                   <Customer />
                 </Card>
-              </div>
-            </div>
-          </div>
+              </Grid>
+            </Grid>
+          </Container>
         </main>
         <Footer />
       </>
