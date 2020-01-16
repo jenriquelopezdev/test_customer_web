@@ -51,6 +51,7 @@ class Sale extends React.Component {
     return (
       <>
         <Menu />
+        <br />
         <main role="main" className="flex-shrink-0 mt-5">
           <Container fixed>
             <Grid container direction="row" justify="space-around" spacing={3}>
