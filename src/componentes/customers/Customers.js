@@ -2,12 +2,11 @@
 import React from "react";
 import Menu from "../menu/Menu";
 import Footer from "../footer/Footer";
+import Customer from "./customer/Customer";
 import { Container, Grid, Card } from "@material-ui/core";
-import Product from "./product/Product";
-
 //import './Slider.css';
 
-class Products extends React.Component {
+class Customers extends React.Component {
   render() {
     return (
       <>
@@ -17,7 +16,7 @@ class Products extends React.Component {
           <Container fixed>
             <Grid container>
               <Grid item xs={12}>
-                <h1>Productos</h1>
+                <h1>Ventas</h1>
               </Grid>
               <Grid item xs={12}>
                 <p>
@@ -28,7 +27,7 @@ class Products extends React.Component {
 
               <Grid item xs={12}>
                 <Card>
-                  <Product />
+                  <Customer />
                 </Card>
               </Grid>
             </Grid>
@@ -40,4 +39,4 @@ class Products extends React.Component {
   }
 }
 
-export default Products;
+export default Customers;

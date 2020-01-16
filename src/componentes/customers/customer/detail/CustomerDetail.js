@@ -22,12 +22,12 @@ import { Skeleton } from "@material-ui/lab";
 import Axios from "axios";
 //import './Slider.css';
 
-class Sale extends React.Component {
+class CustomerDetail extends React.Component {
   constructor(props) {
     super(props);
     //setting a default value
     this.state = {
-      sale: { CUSTOMER: {}, PRODUCT: {} }
+      sale: [{ CUSTOMER: {}, PRODUCT: {} }]
     };
   }
 
@@ -42,8 +42,10 @@ class Sale extends React.Component {
   }
 
   async getSale() {
-    const id = this.props.match.params.saleId;
-    const response = await Axios.get("http://localhost:4040/api/sale/" + id);
+    const id = this.props.match.params.customerId;
+    const response = await Axios.get(
+      "http://localhost:4040/api/sale/customer/" + id
+    );
     return response.data;
   }
 
@@ -74,8 +76,8 @@ class Sale extends React.Component {
                           </Grid>
                           <Grid item xs>
                             <Typography>
-                              {this.state.sale.CUSTOMER.fistName}{" "}
-                              {this.state.sale.CUSTOMER.lastName}
+                              {this.state.sale[0].CUSTOMER.fistName}{" "}
+                              {this.state.sale[0].CUSTOMER.lastName}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -90,7 +92,7 @@ class Sale extends React.Component {
                           </Grid>
                           <Grid item xs>
                             <Typography>
-                              {this.state.sale.CUSTOMER.email}
+                              {this.state.sale[0].CUSTOMER.email}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -105,7 +107,7 @@ class Sale extends React.Component {
                           </Grid>
                           <Grid item xs>
                             <Typography>
-                              {this.state.sale.CUSTOMER.mobilePhone}
+                              {this.state.sale[0].CUSTOMER.mobilePhone}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -120,14 +122,14 @@ class Sale extends React.Component {
                           </Grid>
                           <Grid item xs>
                             <Typography>
-                              {this.state.sale.CUSTOMER.phone}
+                              {this.state.sale[0].CUSTOMER.phone}
                             </Typography>
                           </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
                     <br />
-
+                    <Typography variant="h4">Ventas</Typography>
                     <br />
                     <Grid container>
                       <Table aria-label="simple table">
@@ -137,42 +139,41 @@ class Sale extends React.Component {
                             <TableCell align="right">Proveedor</TableCell>
                             <TableCell align="right">Precio</TableCell>
                             <TableCell align="right">Cantidad</TableCell>
+                            <TableCell align="right">Total</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          <TableRow>
-                            <TableCell component="th" scope="row">
-                              {this.state.sale.PRODUCT.name}
-                            </TableCell>
-                            <TableCell align="right">
-                              {this.state.sale.PRODUCT.provider}
-                            </TableCell>
-                            <TableCell align="right">
-                              {this.state.sale.PRODUCT.currency}{" "}
-                              {this.state.sale.PRODUCT.price}
-                            </TableCell>
-                            <TableCell align="right">
-                              {this.state.sale.quantity}
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell rowSpan={4} />
-                            <TableCell colSpan={2} align="right">
-                              <strong>Total</strong>
-                            </TableCell>
-                            <TableCell align="right">
-                              <NumberFormat
-                                value={
-                                  this.state.sale.quantity *
-                                  this.state.sale.PRODUCT.price
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                decimalScale={2}
-                                prefix={this.state.sale.PRODUCT.currency}
-                              />
-                            </TableCell>
-                          </TableRow>
+                          {this.state.sale.map((item, index) => (
+                            <TableRow>
+                              <TableCell component="th" scope="row">
+                                {this.state.sale[index].PRODUCT.name}
+                              </TableCell>
+                              <TableCell align="right">
+                                {this.state.sale[index].PRODUCT.provider}
+                              </TableCell>
+                              <TableCell align="right">
+                                {this.state.sale[index].PRODUCT.currency}{" "}
+                                {this.state.sale[index].PRODUCT.price}
+                              </TableCell>
+                              <TableCell align="right">
+                                {this.state.sale[index].quantity}
+                              </TableCell>
+                              <TableCell align="right">
+                                <NumberFormat
+                                  value={
+                                    this.state.sale[index].quantity *
+                                    this.state.sale[index].PRODUCT.price
+                                  }
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  decimalScale={2}
+                                  prefix={
+                                    this.state.sale[index].PRODUCT.currency
+                                  }
+                                />
+                              </TableCell>
+                            </TableRow>
+                          ))}
                         </TableBody>
                       </Table>
                     </Grid>
@@ -187,4 +188,4 @@ class Sale extends React.Component {
   }
 }
 
-export default Sale;
+export default CustomerDetail;

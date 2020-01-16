@@ -11,6 +11,8 @@ import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import Home from "./componentes/home/Home";
 import Products from "./componentes/products/Products";
 import Sale from "./componentes/home/sales/detail/Sale";
+import Customers from "./componentes/customers/Customers";
+import CustomerDetail from "./componentes/customers/customer/detail/CustomerDetail";
 
 // Configuración de la rutas del Sitio Web
 ReactDOM.render(
@@ -20,6 +22,8 @@ ReactDOM.render(
         {/* Páginas */}
         <Route exact path="/" component={Home} />
         <Route path="/product" component={Products} />
+        <Route path="/customer" component={Customers} />
+        <Route path="/sales/customer/:customerId" component={CustomerDetail} />
         <Route path="/sales/:saleId" component={Sale} />
       </Switch>
     </div>
