@@ -2,6 +2,7 @@
 import React from "react";
 import Menu from "../menu/Menu";
 import Footer from "../footer/Footer";
+import Customer from "./customer/Customer";
 import Card from "@material-ui/core/Card";
 //import './Slider.css';
 
@@ -29,7 +30,7 @@ class Customers extends React.Component {
             <div className="row">
               <div className="col-12">
                 <Card>
-
+                  <Customer />
                 </Card>
               </div>
             </div>
